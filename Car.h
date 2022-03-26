@@ -21,6 +21,4 @@ protected:
 	unsigned int price=0;
 };
 
-124214124235231541241241241421412
-
 ostream& operator<<(ostream& out, Car& car);
