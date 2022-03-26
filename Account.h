@@ -5,6 +5,7 @@
 #include <vector>
 #include <conio.h>
 #include "Car.h"
+#include "InputCheck.h"
 
 using std::string;
 using std::istream;
@@ -25,7 +26,7 @@ public:
     void CheckBalance() const;
     void AddCar(Car&);
     void GetCars();
-    void Transaction(unsigned int&);
+    bool Transaction(unsigned int&);
 
     friend istream& operator>>(istream& out, Account& acc);
     friend ostream& operator<<(ostream& out, Account& acc);
@@ -34,7 +35,7 @@ private:
     string surname;
     string pass;
     string login;
-    string number;
+   // string number;
     string status;
     unsigned int money=0;
     vector<Car> list;

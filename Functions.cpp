@@ -33,9 +33,14 @@ void Functions::Authorization()
 
 				exit(0);
 			else {
-				Account temp = salon.SignIn();
+				bool success = true;
+				Account temp = salon.SignIn(success);
+				if (success)
 				SelectMenu(temp);
 			}
+			do {
+				cout << "\nНажмите для продолжения" << endl;
+			} while (!(_getch()));
 		}
 
 
@@ -80,8 +85,13 @@ void Functions::UserMenu(Account& acc)
 			else if (str == 2) salon.SearchCar(acc);
 			else if (str == 3) acc.GetCars();
 			else if (str == 4) acc.Deposit();
-			else if (str == 4) acc.CheckBalance();
-			else Authorization();
+			else if (str == 5) acc.CheckBalance();
+			else if (str == 6) {
+				system("cls"); Authorization();
+			}
+			do {
+				cout << "\nНажмите для продолжения" << endl;
+			} while (!(_getch()));
 			break;
 		default:
 			break;

@@ -1,5 +1,7 @@
 #include "Account.h"
 
+extern InputCheck inp;
+
 Account::Account(const string &name1, const string &surname1, const string &login1, const string &pass1)
 {
     name = name1;
@@ -37,16 +39,14 @@ void Account::Deposit()
 {
     unsigned int cash;
     cout << "Введите сумму: ";
-    cin >> cash;
+    inp.GetValue<unsigned int>(cash);
     money += cash;
+    cout << "\nУспешно" << endl;
 }
 
 void Account::CheckBalance() const
 {
-    cout << "Текущий баланс - " << money << endl;
-    do {
-        cout << "Нажмите для продолжения";
-    } while (!_getch());
+    cout << "\nТекущий баланс - " << money << endl;
 }
 
 void Account::AddCar(Car& car) {
@@ -56,22 +56,25 @@ void Account::AddCar(Car& car) {
 void Account::GetCars()
 {
     int index = 0;
-    for (auto& c : list) {
+    if (!list.size()) {
+        cout << "\nПусто\n";
+        return;
+    }
+        for (auto& c : list) {
         cout << ++index<<". " << c << endl;
     }
 
-    do { cout << "Нажмите для продолжения" << endl; 
-    } while (!_getch());
 }
 
-void Account::Transaction(unsigned int& value)
+bool Account::Transaction(unsigned int& value)
 {
     if (value > money) {
-        cout << "Не хватает денег" << endl; return;
+        cout << "\nНе хватает денег" << endl; return 0;
     }
     else {
         money -= value;
-        cout << "Успешно" << endl;
+        cout << "\nУспешно" << endl;
+        return 1;
     }
 }
 

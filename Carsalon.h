@@ -5,6 +5,7 @@
 #include "Car.h"
 #include <Windows.h>
 #include <vector>
+#include "InputCheck.h"
 
 using std::vector;
 using std::cin;
@@ -15,7 +16,7 @@ public:
 
 	Carsalon();
 	void AddUser();
-	Account& SignIn();
+	Account& SignIn(bool&);
 	void BuyCar(Account&);
 	void SoldCar(Account&);
 	void SearchCar(Account&);

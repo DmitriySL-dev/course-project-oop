@@ -50,5 +50,8 @@
     <ClInclude Include="Car.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="InputCheck.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
