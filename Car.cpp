@@ -20,3 +20,8 @@ ostream& operator<<(ostream& out, Car& car)
 	out << car.make << " " << car.model << " " << car.body << " " << car.price;
 	return out;
 }
+
+istream& operator>>(istream& out, Car& car) {
+	out >> car.make >> car.model >> car.body >> car.price;
+	return out;
+}

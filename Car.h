@@ -13,6 +13,7 @@ public:
 	unsigned int GetPrice();
 
 	friend ostream& operator<<(ostream& out, Car& car);
+	friend istream& operator>>(istream& out, Car& car);
 
 protected:
 	string make;
@@ -20,5 +21,3 @@ protected:
 	string body;
 	unsigned int price=0;
 };
-
-ostream& operator<<(ostream& out, Car& car);

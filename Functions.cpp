@@ -30,13 +30,15 @@ void Functions::Authorization()
 			if (str == 0)
 				salon.AddUser();
 			else if (str == 2)
-
+			{
+				salon.Record();
 				exit(0);
+			}
 			else {
 				bool success = true;
-				Account temp = salon.SignIn(success);
+				Account *temp = salon.SignIn(success);
 				if (success)
-				SelectMenu(temp);
+				SelectMenu(*temp);
 			}
 			do {
 				cout << "\nНажмите для продолжения" << endl;

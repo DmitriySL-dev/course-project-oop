@@ -15,8 +15,9 @@ class Carsalon : public Car {
 public:
 
 	Carsalon();
+	void Record();
 	void AddUser();
-	Account& SignIn(bool&);
+	Account* SignIn(bool&);
 	void BuyCar(Account&);
 	void SoldCar(Account&);
 	void SearchCar(Account&);

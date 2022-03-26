@@ -79,11 +79,24 @@ bool Account::Transaction(unsigned int& value)
 }
 
 istream& operator>>(istream& out, Account& acc) {
-    out >> acc.name >> acc.surname >> acc.login >> acc.pass;
+    out >> acc.name >> acc.surname >> acc.login >> acc.pass>>acc.money;
+    string buf;
+    out.ignore(1);
+    getline(out, buf);
+    while (buf != "/"&& !out.eof()&&buf!="") {
+        Car c;
+        out >> c;
+        acc.list.push_back(c);
+        getline(out, buf);
+    }
     return out;
 }
 
 ostream& operator<<(ostream& out, Account& acc) {
-    out << acc.name << " " << acc.surname << " " << acc.login << " " << acc.pass;
+    out << acc.name << " " << acc.surname << " " << acc.login << " " << acc.pass<<" "<<acc.money<<endl;
+    for (auto& c : acc.list) {
+        out << c<<endl;
+    }
+    out<<"/";
     return out;
 }

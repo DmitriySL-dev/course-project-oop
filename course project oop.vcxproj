@@ -142,7 +142,6 @@
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Account.cpp" />
-    <ClCompile Include="File.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Carsalon.cpp" />
   </ItemGroup>

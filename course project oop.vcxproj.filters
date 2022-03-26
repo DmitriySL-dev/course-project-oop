@@ -21,9 +21,6 @@
     <ClCompile Include="Account.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
-    <ClCompile Include="File.cpp">
-      <Filter>Файлы ресурсов</Filter>
-    </ClCompile>
     <ClCompile Include="Functions.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>

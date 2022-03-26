@@ -6,27 +6,35 @@ Carsalon::Carsalon()
 {
 		File f;
 		f.FromFile(accounts, "accounts.txt");
+		f.FromFile(cars, "cars.txt");
+}
+
+void Carsalon::Record()
+{
+	File f;
+	f.InFile(accounts, "accounts.txt");
+	f.InFile(cars, "cars.txt");
 }
 
 void Carsalon::AddUser() {
 	cout << "Введите имя, фамилию, логин, пароль: ";
-	Account acc;
-	cin >> acc;
-	accounts.push_back(acc);
+	string name, surname, login, pass;
+	cin >> name>>surname>>login>>pass;
+	accounts.push_back({ name,surname,login,pass });
 	cout << "\nДобавлено" << endl;
 }
 
-Account& Carsalon::SignIn(bool& success) {
+Account* Carsalon::SignIn(bool& success) {
 	string login, pass;
 	cout << "Введите логин, пароль: ";
 	cin >> login >> pass;
 	for (auto& c : accounts) {
-		if (c.GetLogin() == login && c.GetPass() == pass) return c;
+		if (c.GetLogin() == login && c.GetPass() == pass) return &c;
 	}
 	cout << "\nАккаунт не найден"<<endl;
 	success = false;
 	Account *acc=new Account;
-	return *acc;
+	return acc;
 }
 
 void Carsalon::BuyCar(Account& acc)
