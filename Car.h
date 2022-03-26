@@ -8,14 +8,17 @@ using namespace std;
 class Car {
 public:
 	Car();
-	Car(string mk, string md, string b, string p);
+	Car(string mk, string md, string b, unsigned int p);
+	
+	unsigned int GetPrice();
+
 	friend ostream& operator<<(ostream& out, Car& car);
 
-private:
+protected:
 	string make;
 	string model;
 	string body;
-	string price;
+	unsigned int price=0;
 };
 
 ostream& operator<<(ostream& out, Car& car);

@@ -36,6 +36,8 @@ void Carsalon::BuyCar(Account& acc)
 	}
 	cout << "¬ведите номер автомобил€, который хотите купить: ";
 	cin >> index;
+	unsigned int value = cars[index - 1].GetPrice();
+	acc.Transaction(value);
 	acc.AddCar(cars[index - 1]);
 	cars.erase(cars.begin() + index-1);
 	
@@ -44,7 +46,8 @@ void Carsalon::BuyCar(Account& acc)
 void Carsalon::SoldCar(Account& acc)
 {
 	cout << "¬ведите марку, модель, кузов и цену автомобил€: ";
-	string mk, md, body, price;
+	string mk, md, body;
+	unsigned int price;
 	cin >> mk >> md >> body >> price;
 	cars.push_back({ mk,md,body,price });
 }

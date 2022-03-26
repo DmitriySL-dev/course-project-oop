@@ -2,12 +2,17 @@
 
 Car::Car() {}
 
-Car::Car(string mk, string md, string b, string p)
+Car::Car(string mk, string md, string b, unsigned int p)
 {
 		make = mk;
 		model = md;
 		body = b;
 		price = p;
+}
+
+unsigned int Car::GetPrice()
+{
+	return price;
 }
 
 ostream& operator<<(ostream& out, Car& car)

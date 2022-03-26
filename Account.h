@@ -25,6 +25,7 @@ public:
     void CheckBalance() const;
     void AddCar(Car&);
     void GetCars();
+    void Transaction(unsigned int&);
 
     friend istream& operator>>(istream& out, Account& acc);
     friend ostream& operator<<(ostream& out, Account& acc);

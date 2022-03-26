@@ -64,6 +64,17 @@ void Account::GetCars()
     } while (!_getch());
 }
 
+void Account::Transaction(unsigned int& value)
+{
+    if (value > money) {
+        cout << "Не хватает денег" << endl; return;
+    }
+    else {
+        money -= value;
+        cout << "Успешно" << endl;
+    }
+}
+
 istream& operator>>(istream& out, Account& acc) {
     out >> acc.name >> acc.surname >> acc.login >> acc.pass;
     return out;
