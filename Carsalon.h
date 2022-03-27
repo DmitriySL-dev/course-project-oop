@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include <vector>
+#include <iomanip>
 
 #include "InputCheck.h"
 #include "Account.h"
@@ -20,15 +21,21 @@ public:
 	Carsalon();
 	void Record();
 
-	void AddUser();
-	void AddAdmin();
+							//USER FUCTIONALITY
+	void AddUser();			
 	Account* SignIn(bool&);
 
 	void BuyCar(Account&);
 	void SoldCar(Account&);
 	void SearchCar(Account&);
-
 	void ShowCars();
+
+							//ADMIN FUNCTIONALITY
+	void AddAdmin();		
+
+	void DeleteAcc();
+	void DeleteCar();
+
 	void ShowAccounts();
 private:
 	vector<Account> accounts;

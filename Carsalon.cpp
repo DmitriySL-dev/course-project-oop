@@ -51,6 +51,41 @@ void Carsalon::AddAdmin()
 	cout << "\nДобавлено" << endl;
 }
 
+void Carsalon::DeleteAcc()
+{
+	string login;
+	cout << "Введите логин удаляемого аккаунта: ";
+	cin >> login;
+	for (size_t i = 0; i < accounts.size();++i) {
+		if (accounts[i].GetLogin() == login) {
+			accounts.erase(accounts.begin() + i);
+			cout << "\nУспешно" << endl;
+			return;
+		}
+	}
+	cout << "\nАккаунт с таким логином не существует" << endl;
+}
+
+void Carsalon::DeleteCar()
+{
+	unsigned int index = 0;
+	if (cars.size() == 0) {
+		cout << "\nСписок автомобилей пуст" << endl;
+		return;
+	}
+	for (auto& c : cars) {
+		cout << ++index << ". " << c << endl;
+	}
+	cout << "\nВыберите номер удаляемого автомобиля: ";
+	inp.GetValue<unsigned int>(index);
+	while (index > cars.size() || index < 1) {
+		cout << "\nТакого номера нет, попытайтесь снова\n";
+		inp.GetValue<unsigned int>(index);
+	}
+	cars.erase(cars.begin() + index - 1);
+	cout << "\nУспешно" << endl;
+}
+
 Account* Carsalon::SignIn(bool& success) {
 	string login, pass;
 	Account a;
@@ -71,7 +106,7 @@ void Carsalon::BuyCar(Account& acc)
 	ShowCars();
 	cout << "Введите номер автомобиля, который хотите купить: ";
 	inp.GetValue<unsigned int>(index);
-	while (index > cars.size()) {
+	while (index > cars.size()||index<1) {
 		cout << "\nТакого номера нет, попытайтесь снова\n";
 		inp.GetValue<unsigned int>(index);
 	}
@@ -111,7 +146,19 @@ void Carsalon::ShowCars() {
 
 void Carsalon::ShowAccounts()
 {
+	cout << left << setw(12) << "\nИмя" <<setw(12)<< "Фамилия" <<setw(12)<< "Логин\n" << endl;
 	for (auto& c : accounts) {
-		cout << c << endl;
+		cout << left << setw(12) << c.GetName()<<setw(12) << c.GetSurname()<<setw(12) << c.GetLogin() << endl;
+
+		vector<Car> list = c.GetCarList();
+		if (list.size()) {
+			cout << "Автомобили:" << endl;
+			int index = 1;
+			for (auto& f : list) {
+				cout << index++ << ". " << f<<endl;
+			}
+		}
+		cout << endl;
+
 	}
 }

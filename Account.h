@@ -23,14 +23,21 @@ public:
     string GetName() const;
     string GetSurname() const;
     string GetStatus() const;
+    vector<Car> GetCarList()const;
+
     string Encryption(string&);
     virtual void SetStatus();
 
+    void ChangePersonInfo(Account&);
+    void ChangeName();
+    void ChangeSurname();
+    void ChangeLogin();
+    void ChangePass();
 
     void Deposit();
     void CheckBalance() const;
     void AddCar(Car&);
-    void GetCars();
+    void PrintCars();
     bool Transaction(unsigned int&);
 
     friend istream& operator>>(istream& out, Account& acc);

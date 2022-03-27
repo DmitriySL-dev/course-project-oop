@@ -35,9 +35,103 @@ string Account::GetStatus() const
     return status;
 }
 
+vector<Car> Account::GetCarList() const
+{
+    return list;
+}
+
 void Account::SetStatus()
 {
     status = "";
+}
+
+void Account::ChangePersonInfo(Account& acc)
+{
+    int str = 0;
+
+    while (true) {
+        system("cls");
+        vector<string> vec = {
+            "Имя - " + acc.name,
+            "Фамилия - " + acc.surname,
+            "Логин - " + acc.login,
+            "Пароль - *******",
+            "Выход из меню редактирования"
+        };
+        cout << "Выберите редактируемый параметр: "<< endl;
+        for (size_t i = 0; i < vec.size(); ++i) {
+            if (str == i) cout << "> " + vec[i] << endl;
+            else cout << vec[i] << endl;
+        }
+
+        switch (_getch()) {
+        case 72:
+            --str;
+            if (str == -1) str = 4;
+            break;
+        case 80:
+            ++str;
+            if (str == 5) str = 0;
+            break;
+        case 13:
+            if (str == 0) ChangeName();
+            else if (str == 1) ChangeSurname();
+            else if (str == 2) ChangeLogin();
+            else if (str == 3) ChangePass();
+            else if (str == 4) {
+                system("cls"); return;
+            }
+            do {
+                cout << "\nНажмите для продолжения" << endl;
+            } while (!(_getch()));
+            break;
+        default:
+            break;
+
+        }
+    }
+}
+
+void Account::ChangeName()
+{
+    string name;
+    cout << "Введите новое имя: ";
+    cin >> name;
+    this->name = name;
+    cout << "\nУспешно" << endl;
+}
+
+void Account::ChangeSurname()
+{
+    string surname;
+    cout << "Введите новую фамилию: ";
+    cin >> surname;
+    this->surname = surname;
+    cout << "\nУспешно" << endl;
+}
+
+void Account::ChangeLogin() {
+    string login;
+    cout << "Введите новый логин: ";
+    cin >> login;
+    this->login = login;
+    cout << "\nУспешно" << endl;
+}
+
+void Account::ChangePass() {
+    string old_pass, new_pass;
+    cout << "Введите старый пароль: ";
+    cin >> old_pass;
+    if (Encryption(old_pass) == pass) {
+        cout << "Введите новый пароль: ";
+        cin >> new_pass;
+        this->pass = new_pass;
+        cout << "\nУспешно" << endl;
+    }
+    else {
+        cout << "Неверный пароль" << endl;
+    }
+
 }
 
 string Account::Encryption(string&inp)
@@ -67,15 +161,15 @@ void Account::AddCar(Car& car) {
     list.push_back(car);
 }
 
-void Account::GetCars()
+void Account::PrintCars()
 {
     int index = 0;
     if (!list.size()) {
         cout << "\nПусто\n";
         return;
     }
-        for (auto& c : list) {
-        cout << ++index<<". " << c << endl;
+    for (auto& c : list) {
+        cout << ++index << ". " << c << endl;
     }
 
 }

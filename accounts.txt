@@ -5,5 +5,5 @@ www www 222 000 0 Польз.
 /
 eee eee 333 111 0 Польз.
 /
-admin adminovich admin cfokl 0 Админ
+admin adminovich admin admin 0 Админ
 /

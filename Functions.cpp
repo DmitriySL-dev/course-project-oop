@@ -94,7 +94,7 @@ void Functions::UserMenu(Account& acc)
 			if (str == 0) salon.BuyCar(acc);
 			else if (str == 1) salon.SoldCar(acc);
 			else if (str == 2) salon.SearchCar(acc);
-			else if (str == 3) acc.GetCars();
+			else if (str == 3) acc.PrintCars();
 			else if (str == 4) acc.Deposit();
 			else if (str == 5) acc.CheckBalance();
 			else if (str == 6) {
@@ -147,9 +147,9 @@ void Functions::AdminMenu(Account& acc)
 			if (str == 0) salon.ShowAccounts();
 			else if (str == 1) salon.ShowCars();
 			else if (str == 2) salon.AddAdmin();
-			else if (str == 3) acc.GetCars();
-			else if (str == 4) acc.Deposit();
-			else if (str == 5) acc.CheckBalance();
+			else if (str == 3) salon.DeleteAcc();
+			else if (str == 4) salon.DeleteCar();
+			else if (str == 5) acc.ChangePersonInfo(acc);
 			else if (str == 6) {
 				system("cls"); Authorization();
 			}
