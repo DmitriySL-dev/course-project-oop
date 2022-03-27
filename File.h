@@ -26,7 +26,6 @@ public:
     void FromFile(vector<T>& vec, string filename)
     {
         ifstream read(filename);
-
         for (T obj; read >> obj;) {
             vec.push_back(obj);
         }
