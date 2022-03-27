@@ -23,7 +23,9 @@ public:
     string GetName() const;
     string GetSurname() const;
     string GetStatus() const;
+    string Encryption(string&);
     virtual void SetStatus();
+
 
     void Deposit();
     void CheckBalance() const;

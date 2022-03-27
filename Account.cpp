@@ -40,6 +40,15 @@ void Account::SetStatus()
     status = "";
 }
 
+string Account::Encryption(string&inp)
+{
+    string outp = "";
+    for (auto& c : inp) {
+        outp += c ^ 2;
+    }
+    return outp;
+}
+
 void Account::Deposit()
 {
     unsigned int cash;
@@ -84,7 +93,7 @@ bool Account::Transaction(unsigned int& value)
 }
 
 istream& operator>>(istream& out, Account& acc) {
-    out >> acc.name >> acc.surname >> acc.login >> acc.pass>>acc.money;
+    out >> acc.name >> acc.surname >> acc.login >> acc.pass>>acc.money>>acc.status;
     acc.list.clear();
     string buf;
     out.ignore(1);
@@ -101,7 +110,7 @@ istream& operator>>(istream& out, Account& acc) {
 }
 
 ostream& operator<<(ostream& out, Account& acc) {
-    out << acc.name << " " << acc.surname << " " << acc.login << " " << acc.pass<<" "<<acc.money<<endl;
+    out << acc.name << " " << acc.surname << " " << acc.login << " " << acc.pass<<" "<<acc.money<<" "<<acc.status<<endl;
     for (auto& c : acc.list) {
         out << c<<endl;
     }

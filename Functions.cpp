@@ -53,7 +53,7 @@ void Functions::Authorization()
 
 void Functions::SelectMenu(Account&temp)
 {
-	if (temp.GetStatus() == "Admin") AdminMenu(temp);
+	if (temp.GetStatus() == "Админ") AdminMenu(temp);
 	else UserMenu(temp);
 }
 

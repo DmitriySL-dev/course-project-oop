@@ -20,20 +20,44 @@ void Carsalon::AddUser() {
 	cout << "Введите имя, фамилию, логин, пароль: ";
 	string name, surname, login, pass;
 	cin >> name>>surname>>login>>pass;
-	accounts.push_back({ name,surname,login,pass });
+	for (auto& c : accounts) {
+		if (c.GetLogin() == login) {
+			cout << "\nАккаунт с таким логином уже существует" << endl;
+			return;
+		}
+	}
+	Account a;
+	pass = a.Encryption(pass);
+	User us(name, surname, login, pass);
+	accounts.push_back(us);
 	cout << "\nДобавлено" << endl;
 }
 
 void Carsalon::AddAdmin()
 {
+	cout << "Введите имя, фамилию, логин, пароль: ";
+	string name, surname, login, pass;
+	cin >> name >> surname >> login >> pass;
+	for (auto& c : accounts) {
+		if (c.GetLogin() == login) {
+			cout << "\nАккаунт с таким логином уже существует" << endl;
+			return;
+		}
+	}
+	Account a;
+	pass = a.Encryption(pass);
+	Admin ad(name, surname, login, pass);
+	accounts.push_back(ad);
+	cout << "\nДобавлено" << endl;
 }
 
 Account* Carsalon::SignIn(bool& success) {
 	string login, pass;
+	Account a;
 	cout << "Введите логин, пароль: ";
 	cin >> login >> pass;
 	for (auto& c : accounts) {
-		if (c.GetLogin() == login && c.GetPass() == pass) return &c;
+		if (c.GetLogin() == login && c.GetPass() == a.Encryption(pass)) return &c;
 	}
 	cout << "\nАккаунт не найден"<<endl;
 	success = false;
