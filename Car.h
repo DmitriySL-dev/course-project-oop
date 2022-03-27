@@ -19,5 +19,5 @@ protected:
 	string make;
 	string model;
 	string body;
-	unsigned int price=0;
+	unsigned int price;
 };

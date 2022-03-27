@@ -1,6 +1,6 @@
 #include "Car.h"
 
-Car::Car() {}
+Car::Car():price(0) {}
 
 Car::Car(string mk, string md, string b, unsigned int p)
 {

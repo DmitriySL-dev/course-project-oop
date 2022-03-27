@@ -59,14 +59,23 @@ void Functions::SelectMenu(Account&temp)
 
 void Functions::UserMenu(Account& acc)
 {
-	
 
-	vector<string> vec = { "Купить автомобиль","Продать автомобиль", "Найти автомобиль","Купленные автомобили","Депозит","Просмотреть баланс","Выйти из аккаунта" };
+
+	vector<string> vec = {
+		"Купить автомобиль",
+		"Продать автомобиль",
+		"Найти автомобиль",
+		"Купленные автомобили",
+		"Депозит",
+		"Просмотреть баланс"
+		,"Выйти из аккаунта" 
+	};
+
 	int str = 0;
 
 	while (true) {
 		system("cls");
-		cout << "Текущий пользователь - " + acc.GetName() + " " + acc.GetSurname()<<endl;
+		cout << "Текущий пользователь - " + acc.GetName() + " " + acc.GetSurname() << endl;
 		for (size_t i = 0; i < vec.size(); ++i) {
 			if (str == i) cout << "> " + vec[i] << endl;
 			else cout << vec[i] << endl;
@@ -105,8 +114,53 @@ void Functions::UserMenu(Account& acc)
 
 void Functions::AdminMenu(Account& acc)
 {
-	cout <<
-		"1."
-		"2."
-		"3.";
+	vector<string> vec = {
+			"Просмотреть аккаунты",
+			"Посмотреть все автомобили",
+			"Добавить админа",
+			"Удалить аккаунт",
+			"Удалить автомобиль из продажи",
+			"Редактировать свои персональные данные",
+			"Выйти из аккаунта"
+	};
+
+	int str = 0;
+
+	while (true) {
+		system("cls");
+		cout << "Текущий пользователь - " + acc.GetName() + " " + acc.GetSurname() << endl;
+		for (size_t i = 0; i < vec.size(); ++i) {
+			if (str == i) cout << "> " + vec[i] << endl;
+			else cout << vec[i] << endl;
+		}
+
+		switch (_getch()) {
+		case 72:
+			--str;
+			if (str == -1) str = 6;
+			break;
+		case 80:
+			++str;
+			if (str == 7) str = 0;
+			break;
+		case 13:
+			if (str == 0) salon.ShowAccounts();
+			else if (str == 1) salon.ShowCars();
+			else if (str == 2) salon.AddAdmin();
+			else if (str == 3) acc.GetCars();
+			else if (str == 4) acc.Deposit();
+			else if (str == 5) acc.CheckBalance();
+			else if (str == 6) {
+				system("cls"); Authorization();
+			}
+			do {
+				cout << "\nНажмите для продолжения" << endl;
+			} while (!(_getch()));
+			break;
+		default:
+			break;
+
+		}
+	}
+
 }

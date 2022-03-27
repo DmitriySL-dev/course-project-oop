@@ -24,6 +24,10 @@ void Carsalon::AddUser() {
 	cout << "\nДобавлено" << endl;
 }
 
+void Carsalon::AddAdmin()
+{
+}
+
 Account* Carsalon::SignIn(bool& success) {
 	string login, pass;
 	cout << "Введите логин, пароль: ";
@@ -39,14 +43,8 @@ Account* Carsalon::SignIn(bool& success) {
 
 void Carsalon::BuyCar(Account& acc)
 {
-	unsigned int index = 0;
-	if (cars.size() == 0) {
-		cout << "\nСписок автомобилей пуст"<<endl;
-		return;
-	}
-	for (auto& c : cars) {
-		cout <<++index<<". "<<c<<endl;
-	}
+	unsigned int index;
+	ShowCars();
 	cout << "Введите номер автомобиля, который хотите купить: ";
 	inp.GetValue<unsigned int>(index);
 	while (index > cars.size()) {
@@ -74,4 +72,22 @@ void Carsalon::SoldCar(Account& acc)
 
 void Carsalon::SearchCar(Account&)
 {
+}
+
+void Carsalon::ShowCars() {
+	unsigned int index = 0;
+	if (cars.size() == 0) {
+		cout << "\nСписок автомобилей пуст" << endl;
+		return;
+	}
+	for (auto& c : cars) {
+		cout << ++index << ". " << c << endl;
+	}
+}
+
+void Carsalon::ShowAccounts()
+{
+	for (auto& c : accounts) {
+		cout << c << endl;
+	}
 }

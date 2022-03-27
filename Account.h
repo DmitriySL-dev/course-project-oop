@@ -16,13 +16,15 @@ using std::vector;
 class Account {
 public:
     Account(const string &name1, const string &surname1, const string &login1, const string &pass1);
-    Account() {}
+    Account():money(0) {}
 
     string GetPass() const;
     string GetLogin() const;
     string GetName() const;
     string GetSurname() const;
     string GetStatus() const;
+    virtual void SetStatus();
+
     void Deposit();
     void CheckBalance() const;
     void AddCar(Car&);
@@ -31,13 +33,13 @@ public:
 
     friend istream& operator>>(istream& out, Account& acc);
     friend ostream& operator<<(ostream& out, Account& acc);
-private:
+protected:
     string name;
     string surname;
     string pass;
     string login;
    // string number;
     string status;
-    unsigned int money=0;
+    unsigned int money;
     vector<Car> list;
 };

@@ -16,12 +16,17 @@ public:
 
 	Carsalon();
 	void Record();
+
 	void AddUser();
+	void AddAdmin();
 	Account* SignIn(bool&);
+
 	void BuyCar(Account&);
 	void SoldCar(Account&);
 	void SearchCar(Account&);
 
+	void ShowCars();
+	void ShowAccounts();
 private:
 	vector<Account> accounts;
 	vector<Car> cars;

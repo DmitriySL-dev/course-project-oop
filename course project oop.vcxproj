@@ -144,6 +144,8 @@
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Carsalon.cpp" />
+    <ClCompile Include="Admin.cpp" />
+    <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Account.h" />
@@ -151,6 +153,8 @@
     <ClInclude Include="Functions.h" />
     <ClInclude Include="Carsalon.h" />
     <ClInclude Include="Car.h" />
+    <ClInclude Include="User.h" />
+    <ClInclude Include="Admin.h" />
     <ClInclude Include="InputCheck.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

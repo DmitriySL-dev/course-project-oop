@@ -35,6 +35,11 @@ string Account::GetStatus() const
     return status;
 }
 
+void Account::SetStatus()
+{
+    status = "";
+}
+
 void Account::Deposit()
 {
     unsigned int cash;
