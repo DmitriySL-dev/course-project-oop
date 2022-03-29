@@ -86,17 +86,17 @@ void Carsalon::DeleteCar()
 	cout << "\n”спешно" << endl;
 }
 
-Account* Carsalon::SignIn(bool& success) {
+Account& Carsalon::SignIn(bool& success) {
 	string login, pass;
 	Account a;
 	cout << "¬ведите логин, пароль: ";
 	cin >> login >> pass;
 	for (auto& c : accounts) {
-		if (c.GetLogin() == login && c.GetPass() == a.Encryption(pass)) return &c;
+		if (c.GetLogin() == login && c.GetPass() == a.Encryption(pass)) return c;
 	}
 	cout << "\nјккаунт не найден"<<endl;
 	success = false;
-	Account *acc=new Account;
+	Account acc;
 	return acc;
 }
 

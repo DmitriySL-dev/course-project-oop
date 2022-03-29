@@ -23,7 +23,7 @@ public:
 
 							//USER FUCTIONALITY
 	void AddUser();			
-	Account* SignIn(bool&);
+	Account& SignIn(bool&);
 
 	void BuyCar(Account&);
 	void SoldCar(Account&);

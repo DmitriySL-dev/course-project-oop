@@ -125,7 +125,7 @@ void Account::ChangePass() {
     if (Encryption(old_pass) == pass) {
         cout << "¬ведите новый пароль: ";
         cin >> new_pass;
-        this->pass = new_pass;
+        this->pass = Encryption(new_pass);
         cout << "\n”спешно" << endl;
     }
     else {
@@ -188,14 +188,13 @@ bool Account::Transaction(unsigned int& value)
 
 istream& operator>>(istream& out, Account& acc) {
     out >> acc.name >> acc.surname >> acc.login >> acc.pass>>acc.money>>acc.status;
-    acc.list.clear();
     string buf;
     out.ignore(1);
     getline(out, buf);
+
     while (buf != "/"&& !out.eof()&&buf!="") {
         stringstream sstr(buf);
         Car c;
-        //out >> c;
         sstr >> c;
         acc.list.push_back(c);
         getline(out, buf);

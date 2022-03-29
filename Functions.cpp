@@ -36,9 +36,9 @@ void Functions::Authorization()
 			}
 			else {
 				bool success = true;
-				Account *temp = salon.SignIn(success);
+				Account &temp = salon.SignIn(success);
 				if (success)
-				SelectMenu(*temp);
+				SelectMenu(temp);
 			}
 			do {
 				cout << "\nНажмите для продолжения" << endl;
