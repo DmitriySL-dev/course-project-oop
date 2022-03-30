@@ -67,7 +67,8 @@ void Functions::UserMenu(Account& acc)
 		"Найти автомобиль",
 		"Купленные автомобили",
 		"Депозит",
-		"Просмотреть баланс"
+		"Просмотреть баланс",
+		"Редактировать персональные данные"
 		,"Выйти из аккаунта" 
 	};
 
@@ -84,11 +85,11 @@ void Functions::UserMenu(Account& acc)
 		switch (_getch()) {
 		case 72:
 			--str;
-			if (str == -1) str = 6;
+			if (str == -1) str = 7;
 			break;
 		case 80:
 			++str;
-			if (str == 7) str = 0;
+			if (str == 8) str = 0;
 			break;
 		case 13:
 			if (str == 0) salon.BuyCar(acc);
@@ -97,7 +98,8 @@ void Functions::UserMenu(Account& acc)
 			else if (str == 3) acc.PrintCars();
 			else if (str == 4) acc.Deposit();
 			else if (str == 5) acc.CheckBalance();
-			else if (str == 6) {
+			else if (str == 6) acc.ChangePersonInfo();
+			else if (str == 7) {
 				system("cls"); Authorization();
 			}
 			do {
@@ -149,7 +151,7 @@ void Functions::AdminMenu(Account& acc)
 			else if (str == 2) salon.AddAdmin();
 			else if (str == 3) salon.DeleteAcc();
 			else if (str == 4) salon.DeleteCar();
-			else if (str == 5) acc.ChangePersonInfo(acc);
+			else if (str == 5) acc.ChangePersonInfo();
 			else if (str == 6) {
 				system("cls"); Authorization();
 			}

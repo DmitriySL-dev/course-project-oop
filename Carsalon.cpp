@@ -113,6 +113,15 @@ void Carsalon::BuyCar(Account& acc)
 	unsigned int value = cars[index - 1].GetPrice();
 	if (acc.Transaction(value)) {
 		acc.AddCar(cars[index - 1]);
+		string UserID = cars[index - 1].GetUserId();
+		for (auto& c : accounts) {
+			if (c.GetLogin() == UserID) {
+				c.PlusMoney(value);
+				break;
+			}
+		}
+		string NewUserID = acc.GetLogin();
+		cars[index - 1].SetUserId(NewUserID);
 		cars.erase(cars.begin() + index - 1);
 	}
 	
@@ -125,7 +134,7 @@ void Carsalon::SoldCar(Account& acc)
 	unsigned int price;
 	cin >> mk >> md >> body;
 	inp.GetValue(price);
-	cars.push_back({ mk,md,body,price });
+	cars.push_back({ mk,md,body,price,acc.GetLogin() });
 	cout << "\nДобавлен для продажи" << endl;
 }
 
@@ -140,7 +149,7 @@ void Carsalon::ShowCars() {
 		return;
 	}
 	for (auto& c : cars) {
-		cout << ++index << ". " << c << endl;
+		cout << ++index << ". " << c.GetCarInfo() << endl;
 	}
 }
 
@@ -155,7 +164,7 @@ void Carsalon::ShowAccounts()
 			cout << "Автомобили:" << endl;
 			int index = 1;
 			for (auto& f : list) {
-				cout << index++ << ". " << f<<endl;
+				cout << index++ << ". " << f.GetCarInfo()<<endl;
 			}
 		}
 		cout << endl;

@@ -28,7 +28,7 @@ public:
     string Encryption(string&);
     virtual void SetStatus();
 
-    void ChangePersonInfo(Account&);
+    void ChangePersonInfo();
     void ChangeName();
     void ChangeSurname();
     void ChangeLogin();
@@ -39,6 +39,7 @@ public:
     void AddCar(Car&);
     void PrintCars();
     bool Transaction(unsigned int&);
+    void PlusMoney(unsigned int& value);
 
     friend istream& operator>>(istream& out, Account& acc);
     friend ostream& operator<<(ostream& out, Account& acc);

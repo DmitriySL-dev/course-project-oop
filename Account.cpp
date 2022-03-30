@@ -45,16 +45,16 @@ void Account::SetStatus()
     status = "";
 }
 
-void Account::ChangePersonInfo(Account& acc)
+void Account::ChangePersonInfo()
 {
     int str = 0;
 
     while (true) {
         system("cls");
         vector<string> vec = {
-            "Имя - " + acc.name,
-            "Фамилия - " + acc.surname,
-            "Логин - " + acc.login,
+            "Имя - " + name,
+            "Фамилия - " + surname,
+            "Логин - " + login,
             "Пароль - *******",
             "Выход из меню редактирования"
         };
@@ -184,6 +184,11 @@ bool Account::Transaction(unsigned int& value)
         cout << "\nУспешно" << endl;
         return 1;
     }
+}
+
+void Account::PlusMoney(unsigned int& value)
+{
+    money += value;
 }
 
 istream& operator>>(istream& out, Account& acc) {
