@@ -2,7 +2,7 @@
 
 #include "Account.h"
 
-class Admin :public Account {
+class Admin :public Account { //Класс администратора
 public:
 	Admin();
 	Admin(const string& name1, const string& surname1, const string& login1, const string& pass1);

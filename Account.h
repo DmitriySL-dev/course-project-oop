@@ -13,22 +13,22 @@ using std::istream;
 using std::ostream;
 using std::vector;
 
-class Account {
+class Account { //Класс аккаунта
 public:
     Account(const string &name1, const string &surname1, const string &login1, const string &pass1);
     Account():money(0) {}
 
-    string GetPass() const;
-    string GetLogin() const;
-    string GetName() const;
-    string GetSurname() const;
-    string GetStatus() const;
+    const string& GetPass() const;  //Геттеры класса
+    const string& GetLogin() const;
+    const string& GetName() const;
+    const string& GetSurname() const;
+    const string& GetStatus() const;
     vector<Car> GetCarList()const;
 
-    string Encryption(string&);
-    virtual void SetStatus();
+    string Encryption(string&); //Функция шифровки/дешифровки пароля
+    virtual void SetStatus();  //Виртуальная функция
 
-    void ChangePersonInfo();
+    void ChangePersonInfo();  //Функции изменения персональных данных
     void ChangeName();
     void ChangeSurname();
     void ChangeLogin();
@@ -48,7 +48,6 @@ protected:
     string surname;
     string pass;
     string login;
-   // string number;
     string status;
     unsigned int money;
     vector<Car> list;

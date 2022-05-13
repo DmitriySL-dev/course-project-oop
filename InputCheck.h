@@ -5,7 +5,7 @@
 
 using std::string;
 
-class InputCheck {
+class InputCheck { //Класс проверки ввода с шаблонными методами
 public:
 	template<typename T>
 	T GetValue(T& value)
@@ -28,7 +28,7 @@ public:
 	}
 
 	template<>
-	unsigned int GetValue(unsigned int& value) {
+	unsigned int GetValue(unsigned int& value) {  //специализация шаблона под значение uint
 		int buf;
 		while (true) {
 			try

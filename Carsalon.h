@@ -3,6 +3,7 @@
 #include <Windows.h>
 #include <vector>
 #include <iomanip>
+#include <memory>
 
 #include "InputCheck.h"
 #include "Account.h"
@@ -10,34 +11,35 @@
 #include "Admin.h"
 #include "File.h"
 #include "Car.h"
+#include "History.h"
 
 using std::vector;
 using std::cin;
 using std::cout;
 
-class Carsalon : public Car {
+class Carsalon : public Car { //Класс автосалона
 public:
 
 	Carsalon();
 	void Record();
 
-							//USER FUCTIONALITY
+							//Функционал пользователя
 	void AddUser();			
-	Account& SignIn(bool&);
+	shared_ptr<Account> SignIn(bool&);
 
-	void BuyCar(Account&);
-	void SoldCar(Account&);
-	void SearchCar(Account&);
+	void BuyCar(shared_ptr<Account>);
+	void SoldCar(shared_ptr<Account>);
+	void SearchCar(shared_ptr<Account>);
 	void ShowCars();
 
-							//ADMIN FUNCTIONALITY
+							//Функционал админа
 	void AddAdmin();		
 
-	void DeleteAcc();
+	void DeleteAcc(const string &cc);
 	void DeleteCar();
 
 	void ShowAccounts();
 private:
-	vector<Account> accounts;
+	vector<shared_ptr<Account>> accounts;
 	vector<Car> cars;
 };

@@ -10,27 +10,27 @@ Account::Account(const string &name1, const string &surname1, const string &logi
     pass = pass1;
 }
 
-string Account::GetPass() const
+const string& Account::GetPass() const
 {
     return pass;
 }
 
-string Account::GetLogin() const
+const string& Account::GetLogin() const
 {
     return login;
 }
 
-string Account::GetName() const
+const string& Account::GetName() const
 {
     return name;
 }
 
-string Account::GetSurname() const
+const string& Account::GetSurname() const
 {
     return surname;
 }
 
-string Account::GetStatus() const
+const string& Account::GetStatus() const
 {
     return status;
 }
@@ -134,11 +134,11 @@ void Account::ChangePass() {
 
 }
 
-string Account::Encryption(string&inp)
+string Account::Encryption(string&inp) //Функция шифрования
 {
     string outp = "";
     for (auto& c : inp) {
-        outp += c ^ 2;
+        outp += c ^ 2; //Шифрование XOR способом
     }
     return outp;
 }
@@ -169,7 +169,7 @@ void Account::PrintCars()
         return;
     }
     for (auto& c : list) {
-        cout << ++index << ". " << c << endl;
+        cout << ++index << ". " << c.GetCarInfo() << endl;
     }
 
 }

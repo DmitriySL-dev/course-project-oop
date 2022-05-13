@@ -5,15 +5,11 @@
 
 using namespace std;
 
-class Car {
+class Car { //Класс автомобиля
 public:
 	Car();
 	Car(string mk, string md, string b, unsigned int p,string userID);
 	
-
-	//string GetMake();
-	//string GetModel();
-	//string GetBody();
 	string GetUserId();
 	unsigned int GetPrice();
 

@@ -1,8 +1,9 @@
 #include "Functions.h"
 
 Carsalon salon;
+History hist;
 
-void Functions::Authorization()
+void Functions::Authorization() //Функция авторизации
 {
 	vector<string> vec = { "Регистрация","Вход","Выход" };
 	int str = 0;
@@ -36,9 +37,9 @@ void Functions::Authorization()
 			}
 			else {
 				bool success = true;
-				Account &temp = salon.SignIn(success);
+				shared_ptr<Account> temp = salon.SignIn(success); //получение ссылки на объект, с который будем работать
 				if (success)
-				SelectMenu(temp);
+				SelectMenu(temp); //выбор меню в соответствии со статусом
 			}
 			do {
 				cout << "\nНажмите для продолжения" << endl;
@@ -51,13 +52,13 @@ void Functions::Authorization()
 
 }
 
-void Functions::SelectMenu(Account&temp)
+void Functions::SelectMenu(shared_ptr<Account> temp)
 {
-	if (temp.GetStatus() == "Админ") AdminMenu(temp);
+	if ((*temp).GetStatus() == "Админ") AdminMenu(temp);
 	else UserMenu(temp);
 }
 
-void Functions::UserMenu(Account& acc)
+void Functions::UserMenu(shared_ptr<Account> acc)
 {
 
 
@@ -68,15 +69,15 @@ void Functions::UserMenu(Account& acc)
 		"Купленные автомобили",
 		"Депозит",
 		"Просмотреть баланс",
-		"Редактировать персональные данные"
-		,"Выйти из аккаунта" 
+		"Редактировать персональные данные",
+		"Выйти из аккаунта" 
 	};
 
 	int str = 0;
 
 	while (true) {
 		system("cls");
-		cout << "Текущий пользователь - " + acc.GetName() + " " + acc.GetSurname() << endl;
+		cout << "Текущий пользователь - " + (*acc).GetName() + " " + (*acc).GetSurname() << endl;
 		for (size_t i = 0; i < vec.size(); ++i) {
 			if (str == i) cout << "> " + vec[i] << endl;
 			else cout << vec[i] << endl;
@@ -95,10 +96,10 @@ void Functions::UserMenu(Account& acc)
 			if (str == 0) salon.BuyCar(acc);
 			else if (str == 1) salon.SoldCar(acc);
 			else if (str == 2) salon.SearchCar(acc);
-			else if (str == 3) acc.PrintCars();
-			else if (str == 4) acc.Deposit();
-			else if (str == 5) acc.CheckBalance();
-			else if (str == 6) acc.ChangePersonInfo();
+			else if (str == 3) (*acc).PrintCars();
+			else if (str == 4) (*acc).Deposit();
+			else if (str == 5) (*acc).CheckBalance();
+			else if (str == 6) (*acc).ChangePersonInfo();
 			else if (str == 7) {
 				system("cls"); Authorization();
 			}
@@ -114,7 +115,7 @@ void Functions::UserMenu(Account& acc)
 
 }
 
-void Functions::AdminMenu(Account& acc)
+void Functions::AdminMenu(shared_ptr<Account> acc)
 {
 	vector<string> vec = {
 			"Просмотреть аккаунты",
@@ -123,6 +124,7 @@ void Functions::AdminMenu(Account& acc)
 			"Удалить аккаунт",
 			"Удалить автомобиль из продажи",
 			"Редактировать свои персональные данные",
+			"Просмотр истории действий",
 			"Выйти из аккаунта"
 	};
 
@@ -130,29 +132,32 @@ void Functions::AdminMenu(Account& acc)
 
 	while (true) {
 		system("cls");
-		cout << "Текущий пользователь - " + acc.GetName() + " " + acc.GetSurname() << endl;
+		//cout << &acc<<endl;
+		cout << "Текущий пользователь - " + (*acc).GetName() + " " + (*acc).GetSurname() << endl;
 		for (size_t i = 0; i < vec.size(); ++i) {
 			if (str == i) cout << "> " + vec[i] << endl;
 			else cout << vec[i] << endl;
 		}
 
+
 		switch (_getch()) {
 		case 72:
 			--str;
-			if (str == -1) str = 6;
+			if (str == -1) str = 7;
 			break;
 		case 80:
 			++str;
-			if (str == 7) str = 0;
+			if (str == 8) str = 0;
 			break;
 		case 13:
 			if (str == 0) salon.ShowAccounts();
 			else if (str == 1) salon.ShowCars();
-			else if (str == 2) salon.AddAdmin();
-			else if (str == 3) salon.DeleteAcc();
+			else if (str == 2)  salon.AddAdmin();
+			else if (str == 3) salon.DeleteAcc((*acc).GetLogin()); 
 			else if (str == 4) salon.DeleteCar();
-			else if (str == 5) acc.ChangePersonInfo();
-			else if (str == 6) {
+			else if (str == 5) (*acc).ChangePersonInfo();
+			else if(str==6) hist.WatchHistory();
+			else if (str == 7) {
 				system("cls"); Authorization();
 			}
 			do {

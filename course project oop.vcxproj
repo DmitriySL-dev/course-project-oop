@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Car.cpp" />
+    <ClCompile Include="History.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="Functions.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Functions.h" />
     <ClInclude Include="Carsalon.h" />
     <ClInclude Include="Car.h" />
+    <ClInclude Include="History.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="Admin.h" />
     <ClInclude Include="InputCheck.h" />
