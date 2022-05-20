@@ -1,7 +1,13 @@
 #include "Functions.h"
 
-Carsalon salon;
+static Carsalon salon;
 History hist;
+
+void Functions::SetColor(int back, int text)
+{
+	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hStdOut, (WORD)((back << 4) | text));
+}
 
 void Functions::Authorization() //Функция авторизации
 {
@@ -13,21 +19,25 @@ void Functions::Authorization() //Функция авторизации
 
 		for (size_t i = 0; i < vec.size(); ++i) {
 			if (i == str)
+			{
+				SetColor(0, 4);
 				cout << "> " + vec[i] << endl;
+				SetColor(0, 15);
+			}
 			else
 				cout << vec[i] << endl;
 		}
 
 		switch (_getch()) {
-		case 72:			//up
+		case 72:			//Нажатие клавиши вверх
 			--str;
 			if (str == -1) str = 2;
 			break;
-		case 80:			//down
+		case 80:			//Нажатие клавиши вниз
 			++str;
 			if (str == 3) str = 0;
 			break;
-		case 13:			//enter
+		case 13:			//Нажатие клавиши enter
 			if (str == 0)
 				salon.AddUser();
 			else if (str == 2)
@@ -37,7 +47,7 @@ void Functions::Authorization() //Функция авторизации
 			}
 			else {
 				bool success = true;
-				shared_ptr<Account> temp = salon.SignIn(success); //получение ссылки на объект, с который будем работать
+				shared_ptr<Account> temp = salon.SignIn(success); //получение указателя на объект, с который будем работать
 				if (success)
 				SelectMenu(temp); //выбор меню в соответствии со статусом
 			}
@@ -54,7 +64,7 @@ void Functions::Authorization() //Функция авторизации
 
 void Functions::SelectMenu(shared_ptr<Account> temp)
 {
-	if ((*temp).GetStatus() == "Админ") AdminMenu(temp);
+	if (temp->GetStatus() == "Админ") AdminMenu(temp);
 	else UserMenu(temp);
 }
 
@@ -77,9 +87,14 @@ void Functions::UserMenu(shared_ptr<Account> acc)
 
 	while (true) {
 		system("cls");
-		cout << "Текущий пользователь - " + (*acc).GetName() + " " + (*acc).GetSurname() << endl;
+		cout << "Текущий пользователь - " + acc->GetName() + " " + acc->GetSurname() << endl;
 		for (size_t i = 0; i < vec.size(); ++i) {
-			if (str == i) cout << "> " + vec[i] << endl;
+			if (str == i)
+			{
+				SetColor(0, 4);
+				cout << "> " + vec[i] << endl;
+				SetColor(0, 15);
+			}
 			else cout << vec[i] << endl;
 		}
 
@@ -96,10 +111,10 @@ void Functions::UserMenu(shared_ptr<Account> acc)
 			if (str == 0) salon.BuyCar(acc);
 			else if (str == 1) salon.SoldCar(acc);
 			else if (str == 2) salon.SearchCar(acc);
-			else if (str == 3) (*acc).PrintCars();
-			else if (str == 4) (*acc).Deposit();
-			else if (str == 5) (*acc).CheckBalance();
-			else if (str == 6) (*acc).ChangePersonInfo();
+			else if (str == 3) acc->PrintCars();
+			else if (str == 4) acc->Deposit();
+			else if (str == 5) acc->CheckBalance();
+			else if (str == 6) acc->ChangePersonInfo();
 			else if (str == 7) {
 				system("cls"); Authorization();
 			}
@@ -123,6 +138,7 @@ void Functions::AdminMenu(shared_ptr<Account> acc)
 			"Добавить админа",
 			"Удалить аккаунт",
 			"Удалить автомобиль из продажи",
+			"Отсортировать все автомобили",
 			"Редактировать свои персональные данные",
 			"Просмотр истории действий",
 			"Выйти из аккаунта"
@@ -133,9 +149,14 @@ void Functions::AdminMenu(shared_ptr<Account> acc)
 	while (true) {
 		system("cls");
 		//cout << &acc<<endl;
-		cout << "Текущий пользователь - " + (*acc).GetName() + " " + (*acc).GetSurname() << endl;
+		cout << "Текущий пользователь - " + acc->GetName() + " " + acc->GetSurname() << endl;
 		for (size_t i = 0; i < vec.size(); ++i) {
-			if (str == i) cout << "> " + vec[i] << endl;
+			if (str == i)
+			{
+				SetColor(0, 4);
+				cout << "> " + vec[i] << endl;
+				SetColor(0, 15);
+			}
 			else cout << vec[i] << endl;
 		}
 
@@ -143,21 +164,22 @@ void Functions::AdminMenu(shared_ptr<Account> acc)
 		switch (_getch()) {
 		case 72:
 			--str;
-			if (str == -1) str = 7;
+			if (str == -1) str = 8;
 			break;
 		case 80:
 			++str;
-			if (str == 8) str = 0;
+			if (str == 9) str = 0;
 			break;
 		case 13:
 			if (str == 0) salon.ShowAccounts();
 			else if (str == 1) salon.ShowCars();
 			else if (str == 2)  salon.AddAdmin();
-			else if (str == 3) salon.DeleteAcc((*acc).GetLogin()); 
+			else if (str == 3) salon.DeleteAcc(acc->GetLogin());
 			else if (str == 4) salon.DeleteCar();
-			else if (str == 5) (*acc).ChangePersonInfo();
-			else if(str==6) hist.WatchHistory();
-			else if (str == 7) {
+			else if (str == 5) salon.SortCars(acc);
+			else if (str == 6) acc->ChangePersonInfo();
+			else if (str == 7) hist.WatchHistory();
+			else if (str == 8) {
 				system("cls"); Authorization();
 			}
 			do {

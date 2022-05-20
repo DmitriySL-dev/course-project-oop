@@ -4,6 +4,7 @@
 #include <vector>
 #include <conio.h>
 #include <memory>
+#include <Windows.h>
 
 #include "Carsalon.h"
 #include "Account.h"
@@ -16,6 +17,7 @@ using std::cout;
 using std::endl;
 
 namespace Functions {  //Пространство имен функций
+	void SetColor(int back, int text);
 	void Authorization();
 	void SelectMenu(shared_ptr<Account>);
 	void UserMenu(shared_ptr<Account>); 

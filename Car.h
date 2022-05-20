@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <tuple>
 
 using namespace std;
 
@@ -12,13 +13,18 @@ public:
 	
 	string GetUserId();
 	unsigned int GetPrice();
+	string GetMake() const;
+	string GetBody() const;
+	string GetModel() const;
 
 	void SetUserId(string &value);
 	string GetCarInfo();
 
+
 	friend ostream& operator<<(ostream& out, Car& car);
 	friend istream& operator>>(istream& out, Car& car);
 
+	friend bool operator<(Car& l, Car& r);
 protected:
 	string make;
 	string model;

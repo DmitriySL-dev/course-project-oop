@@ -4,6 +4,7 @@
 #include <vector>
 #include <iomanip>
 #include <memory>
+#include <algorithm>
 
 #include "InputCheck.h"
 #include "Account.h"
@@ -27,9 +28,10 @@ public:
 	void AddUser();			
 	shared_ptr<Account> SignIn(bool&);
 
-	void BuyCar(shared_ptr<Account>);
-	void SoldCar(shared_ptr<Account>);
-	void SearchCar(shared_ptr<Account>);
+	void BuyCar(shared_ptr<Account>&);
+	void SoldCar(shared_ptr<Account>&);
+	void SearchCar(shared_ptr<Account>&);
+	void SortCars(shared_ptr<Account>&);
 	void ShowCars();
 
 							//Функционал админа

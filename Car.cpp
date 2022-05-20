@@ -36,6 +36,21 @@ unsigned int Car::GetPrice()
 	return price;
 }
 
+string Car::GetMake() const
+{
+	return make;
+}
+
+string Car::GetBody() const
+{
+	return body;
+}
+
+string Car::GetModel() const
+{
+	return model;
+}
+
 void Car::SetUserId(string& value)
 {
 	userID = value;
@@ -57,4 +72,8 @@ ostream& operator<<(ostream& out, Car& car)
 istream& operator>>(istream& out, Car& car) {
 	out >> car.make >> car.model >> car.body >> car.price>>car.userID;
 	return out;
+}
+
+bool operator<(Car& l, Car& r) {
+	return tie(l.make, l.model, l.body, l.price) < tie(r.make, r.model, r.body, r.price);
 }
